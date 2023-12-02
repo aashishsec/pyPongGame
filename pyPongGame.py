@@ -4,16 +4,17 @@ import random
 pygame.init()
 
 gadget_pair = 1
-ch = int(input("Enter your choice for gadget pair"))
+ch = int(input("Enter your choice for gadget pair:"))
 if ch == 1:
     gadget_pair = 1
 elif ch == 2:
     gadget_pair = 2 
 
+
 #INITIALS 
 WIDTH, HEIGHT= 1000, 600
 wn = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("pyPong")
+pygame.display.set_caption("pyPongGame")
 run = True
 player_1 = player_2 = 0
 direction = [0, 1]
@@ -232,6 +233,7 @@ while run:
             left_gadget = 0
             left_gadget_remaining -= 1
 
+
         if right_gadget == 1:
             if right_paddle_x <= ball_x <= right_paddle_x + paddle_width:
                 if right_paddle_y <= ball_y <= right_paddle_y + paddle_height:
@@ -241,11 +243,13 @@ while run:
                     right_gadget = 0
                     right_gadget_remaining -= 1
         
+
         elif right_gadget == 2:
             right_paddle_y = ball_y
             right_gadget = 0
             right_gadget_remaining -= 1
     
+
     #second pair
     elif gadget_pair == 2:
         if left_gadget == 1:
@@ -259,10 +263,12 @@ while run:
                     left_gadget = 0
                     left_gadget_remaining -= 1
         
+
         elif left_gadget == 2:
             second_left_paddle_y = left_paddle_y + 200
             left_gadget = 0
             left_gadget_remaining -= 1
+
 
         if right_gadget == 1:
             if right_paddle_x <= ball_x <= right_paddle_x + paddle_width:
@@ -280,6 +286,7 @@ while run:
             right_gadget = 0
             right_gadget_remaining -= 1
 
+
     #movements
     ball_x += ball_vel_x
     ball_y += ball_vel_y
@@ -289,6 +296,7 @@ while run:
     left_paddle_y += left_paddle_vel
     second_left_paddle_y += second_left_paddle_vel
     second_right_paddle_y += second_right_paddle_vel
+
 
     #scoreboard
     font = pygame.font.SysFont('callibri', 32)
@@ -307,18 +315,22 @@ while run:
     pygame.draw.rect(wn, RED, pygame.Rect(left_paddle_x, left_paddle_y, paddle_width, paddle_height) )
     pygame.draw.rect(wn, RED, pygame.Rect(right_paddle_x, right_paddle_y, paddle_width, paddle_height) )
 
+
     #dummy ball section
     pygame.draw.circle(wn, BLUE, (dummy_ball_x, dummy_ball_y), radius)
+
 
     #second paddles
     pygame.draw.rect(wn, RED, pygame.Rect(second_left_paddle_x, second_left_paddle_y, paddle_width, paddle_height) )
     pygame.draw.rect(wn, RED, pygame.Rect(second_right_paddle_x, second_right_paddle_y, paddle_width, paddle_height) )
+
 
     #gadget indication
     if left_gadget == 1:
         pygame.draw.circle(wn, WHITE, (left_paddle_x + 10, left_paddle_y + 10), 4)
     if right_gadget == 1:
         pygame.draw.circle(wn, WHITE, (right_paddle_x + 10, right_paddle_y + 10), 4)
+
 
     #endscreen
     winning_font = pygame.font.SysFont('callibri', 100)
@@ -327,9 +339,11 @@ while run:
         endscreen = winning_font.render("PLAYER_1 WON!!!!", True, WHITE)
         wn.blit(endscreen, (200, 250))
     
+
     if player_2 >= 3:
         wn.fill(BLACK)
         endscreen = winning_font.render("PLAYER_2 WON!!!!", True, WHITE)
         wn.blit(endscreen, (200, 250))
+
 
     pygame.display.update()
